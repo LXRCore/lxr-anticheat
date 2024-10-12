@@ -31,7 +31,7 @@ Download the script from the provided link.
 
 ### Step 2: Upload to Your Server
 1. Upload the script folder to your server's `resources` directory.
-2. Rename the folder to `lxrv2-anticheat`.
+2. Rename the folder to `lxr-anticheat`.
 
 ### Step 3: Modify the `fxmanifest.lua`
 Ensure the `fxmanifest.lua` includes support for your framework of choice:
