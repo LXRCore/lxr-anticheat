@@ -10,7 +10,6 @@ Config.Discord = {
     }
 }
 
-
 -- This is a Role DB check. Alerts if a role has changed. (This is VORP specific, disable if you are not using VORP)
 Config.DB = {
     active = true,
