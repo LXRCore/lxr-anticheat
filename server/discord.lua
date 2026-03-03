@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Discord Webhook
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 Discord = {}
 
 Discord.sendNewMessage = function (name, description, embeds, webhookurl, webhookname, webhookavatar, api)

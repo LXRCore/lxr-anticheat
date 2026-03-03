@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Anti Spawn Object (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.Objects.active then
 	CreateThread(function()
 		while true do

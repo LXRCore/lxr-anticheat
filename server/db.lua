@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — DB Role Change Monitor (Server, VORP only)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 local dbchars = {}
 
 local function checkRole(current, old, role)

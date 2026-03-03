@@ -1,7 +1,11 @@
-if Config.FX.active then
-    local fxCounts = {} -- Table to keep track of each player's fx event count
+--[[
+    🐺 LXR Anti-Cheat — Anti Particle FX
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
 
-    -- Utility function to check if a value is in a table
+if Config.FX.active then
+    local fxCounts = {}
+
     local function isInTable(tbl, value)
         for _, v in ipairs(tbl) do
             if v == value then
@@ -11,7 +15,6 @@ if Config.FX.active then
         return false
     end
 
-    -- Utility function to convert a table to a string
     local function tableToString(tbl)
         local result = "{"
         for k, v in pairs(tbl) do
@@ -31,12 +34,12 @@ if Config.FX.active then
     AddEventHandler('ptFxEvent', function(sender, eventName, eventData)
         local eventDataString = (type(eventData) == "table") and tableToString(eventData) or tostring(eventData)
 
-        if not isInTable(Config.fx.fxWhitelist, eventName) then
+        if not isInTable(Config.FX.fxWhitelist, eventName) then
             fxCounts[sender] = (fxCounts[sender] or 0) + 1
 
-            if fxCounts[sender] > Config.fx.limit then
+            if fxCounts[sender] > Config.FX.limit then
                 CancelEvent()
-                DropPlayer(sender, Config.fx.lang.kickreason)
+                DropPlayer(sender, string.format(Config.FX.lang.kickreason, sender, eventName, eventDataString))
             end
         end
     end)

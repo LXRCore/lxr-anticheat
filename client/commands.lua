@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Blacklisted Commands (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 -- Credit: Badger
 if Config.Commands.active then
     Citizen.CreateThread(function()

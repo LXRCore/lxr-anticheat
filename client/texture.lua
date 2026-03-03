@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Texture Detection (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.Textures.active then
     Citizen.CreateThread(function()
         if #Config.Textures.list >= 0 then

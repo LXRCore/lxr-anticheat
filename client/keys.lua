@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Blacklisted Keys (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 -- Credit: Badger
 if Config.Keys.active then
     Citizen.CreateThread(function()

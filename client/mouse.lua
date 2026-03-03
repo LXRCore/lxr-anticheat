@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Spam Click Detection (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 local infractions = Config.SpamClick.infractions
 local maxspaminfractions = Config.SpamClick.maxspaminfractions
 local spamsensitivity = Config.SpamClick.spamsensitivity

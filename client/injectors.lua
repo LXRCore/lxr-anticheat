@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Resource Injection Detection (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.ResourceInject.active then
     RegisterNetEvent(GetCurrentResourceName().. ".verify")
     AddEventHandler(GetCurrentResourceName().. ".verify", function()

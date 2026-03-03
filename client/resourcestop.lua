@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Resource Stop Detection (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.KickOnResourceStop.active then
     AddEventHandler("onClientResourceStop", function(resourceName)
         TriggerServerEvent("ac:kick", Config.KickOnResourceStop.lang.kickreason)

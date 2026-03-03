@@ -1,4 +1,9 @@
-exports('strings',function()
+--[[
+    🐺 LXR Anti-Cheat — Shared String Utilities
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
+exports('strings', function()
     local self = {}
 
     self.xss = function (str) 
