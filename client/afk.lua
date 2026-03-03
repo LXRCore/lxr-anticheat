@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — AFK Detection (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 function getTimeString(time)
     if time < 60 then
         return time .. Config.AFK.lang.seconds

@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Network Heartbeat
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 
 if Config.Net.active then
     local players = {}

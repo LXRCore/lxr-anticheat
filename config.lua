@@ -1,4 +1,100 @@
+--[[
+    ██╗     ██╗  ██╗██████╗        ██████╗ ██████╗ ██████╗ ███████╗
+    ██║     ╚██╗██╔╝██╔══██╗      ██╔════╝██╔═══██╗██╔══██╗██╔════╝
+    ██║      ╚███╔╝ ██████╔╝█████╗██║     ██║   ██║██████╔╝█████╗
+    ██║      ██╔██╗ ██╔══██╗╚════╝██║     ██║   ██║██╔══██╗██╔══╝
+    ███████╗██╔╝ ██╗██║  ██║      ╚██████╗╚██████╔╝██║  ██║███████╗
+    ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝       ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+
+    🐺 LXR Anti-Cheat System — Configuration
+    Advanced multi-framework protection for RedM servers.
+
+    ═══════════════════════════════════════════════════════════════════════════════
+    SERVER INFORMATION
+    ═══════════════════════════════════════════════════════════════════════════════
+
+    Server:      The Land of Wolves 🐺
+    Developer:   iBoss21 / The Lux Empire
+    Website:     https://www.wolves.land
+    Discord:     https://discord.gg/CrKcWdfd3A
+    GitHub:      https://github.com/iBoss21
+    Store:       https://theluxempire.tebex.io
+
+    ═══════════════════════════════════════════════════════════════════════════════
+
+    Version: 2.0.0
+    Framework Support:
+    - LXR Core  (Primary)
+    - RSG Core  (Primary)
+    - VORP Core (Supported / Legacy)
+    - Standalone (Fallback)
+
+    ═══════════════════════════════════════════════════════════════════════════════
+
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- 🐺 RESOURCE NAME PROTECTION - RUNTIME CHECK
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local REQUIRED_RESOURCE_NAME = "lxr-anticheat"
+local currentResourceName = GetCurrentResourceName()
+
+if currentResourceName ~= REQUIRED_RESOURCE_NAME then
+    error(string.format([[
+
+        ═══════════════════════════════════════════════════════════════════════════════
+        ❌ CRITICAL ERROR: RESOURCE NAME MISMATCH ❌
+        ═══════════════════════════════════════════════════════════════════════════════
+
+        Expected: %s
+        Got:      %s
+
+        This resource is branded and must maintain the correct name.
+        Rename the folder to "%s" to continue.
+
+        🐺 wolves.land — The Land of Wolves
+
+        ═══════════════════════════════════════════════════════════════════════════════
+
+    ]], REQUIRED_RESOURCE_NAME, currentResourceName, REQUIRED_RESOURCE_NAME))
+end
+
 Config = {}
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ SERVER BRANDING & INFO ████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+Config.ServerInfo = {
+    name      = 'The Land of Wolves 🐺',
+    developer = 'iBoss21 / The Lux Empire',
+    website   = 'https://www.wolves.land',
+    discord   = 'https://discord.gg/CrKcWdfd3A',
+    github    = 'https://github.com/iBoss21',
+    store     = 'https://theluxempire.tebex.io',
+}
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ FRAMEWORK CONFIGURATION ███████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+--[[
+    Framework Priority (in order):
+    1. LXR-Core  (Primary)
+    2. RSG-Core  (Primary)
+    3. VORP Core (Supported / Legacy)
+    4. Standalone (Fallback)
+
+    Set to 'auto' to detect automatically, or manually specify:
+    'lxr-core' | 'rsg-core' | 'vorp' | 'standalone'
+]]
+Config.Framework = 'auto'
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ DISCORD WEBHOOK ███████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
 
 Config.Discord = {
     active = false,
@@ -10,7 +106,11 @@ Config.Discord = {
     }
 }
 
--- This is a Role DB check. Alerts if a role has changed. (This is VORP specific, disable if you are not using VORP)
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ DATABASE ROLE CHECK ███████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+-- This is a Role DB check. Alerts if a role has changed. (VORP specific — disable if not using VORP)
 Config.DB = {
     active = true,
     adminpingrate = 50000,
@@ -28,6 +128,10 @@ Config.DB = {
     }
 }
 
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ XSS PROTECTION ████████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
 Config.XSS = {
     active = true,
     lang = {
@@ -37,12 +141,20 @@ Config.XSS = {
     }
 }
 
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ SPEED HACK DETECTION ██████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
 Config.Speed = {
     active = true,
     lang = {
         reason = "Speed Hacking"
     }
 }
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ RESOURCE INJECTION ████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
 
 Config.ResourceInject = {
     active = true,
@@ -51,15 +163,23 @@ Config.ResourceInject = {
     }
 }
 
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ NETWORK HEARTBEAT ██████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
 Config.Net = {
     active = true,
     allowedoffenses = 2,
-    checkinrate = 5000, -- Milisecond
+    checkinrate = 5000, -- Milliseconds
     kickrate = 20000,
     lang = {
         kickreason = "You must be connected to the internet."
     }
 }
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ AFK DETECTION ██████████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
 
 Config.AFK = {
     active = true,
@@ -81,6 +201,10 @@ Config.AFK = {
     }
 }
 
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ SPAM CLICK DETECTION ██████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
 Config.SpamClick = {
     active = true,
     infractions = 0,
@@ -92,15 +216,23 @@ Config.SpamClick = {
     }
 }
 
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ RESOURCE STOP DETECTION ████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
 Config.KickOnResourceStop = {
     active = true,
     lang = {
         kickreason = "Stop Resource Detected",
-        warning = "Stoping resources is not allowed"
+        warning = "Stopping resources is not allowed"
     }
 }
 
-Config.Objects = { -- Anti Spawn Object
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ ANTI SPAWN OBJECT █████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+Config.Objects = {
     active = false,
 
     --- Add more objects
@@ -109,12 +241,20 @@ Config.Objects = { -- Anti Spawn Object
     blacklist = {}
 }
 
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ INFINITE AMMO PROTECTION ██████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
 -- A check to ensure no one is using Infinite ammo
 Config.InfiniteAmmo = {
     active = true
 }
 
-Config.Weapons = { -- Blacklist Weapon and Anti Infinte Ammo
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ WEAPON BLACKLIST ███████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+Config.Weapons = {
     active = false,
 
     --- Add more weapons
@@ -123,13 +263,21 @@ Config.Weapons = { -- Blacklist Weapon and Anti Infinte Ammo
     blacklistlist = {}
 }
 
-Config.PlayerStatus = { -- Anti Change Health
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ PLAYER STATUS / HEALTH HACK ████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+Config.PlayerStatus = {
     active = true,
     health = 600,       -- Default Value (2088 = Golden Core Health)
     lang = {
         kickreason = "Player health hack detected"
     }
 }
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ PARTICLE FX LIMITER ████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
 
 Config.FX = {
     active = false,
@@ -139,11 +287,15 @@ Config.FX = {
         -- Add other fx event names here
     },
     lang = {
-        kickreason = 'Player %s caused event %s too many times with data %s', sender, eventName, eventDataString
+        kickreason = 'Player %s caused event %s too many times with data %s'
     }
 }
 
-Config.Commands = { -- Blacklisted commands. This can be used to blacklist cheat menu commands
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ BLACKLISTED COMMANDS ███████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+Config.Commands = {
     active = true,
     list = {
         "lynx",
@@ -159,7 +311,11 @@ Config.Commands = { -- Blacklisted commands. This can be used to blacklist cheat
     }
 }
 
-Config.Keys = { -- Blacklist certain keys from being pressed. This can be used to blacklist cheat menu keys
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ BLACKLISTED KEYS ███████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
+
+Config.Keys = {
     active = true,
     list = {
         {{47, 21}, "Shift + G Keys"},
@@ -169,6 +325,10 @@ Config.Keys = { -- Blacklist certain keys from being pressed. This can be used t
         kickreason = "Cheat Menu detected"
     }
 }
+
+-- ████████████████████████████████████████████████████████████████████████████████
+-- ████████████████████████ TEXTURE DETECTION ██████████████████████████████████████
+-- ████████████████████████████████████████████████████████████████████████████████
 
 Config.Textures = {
     active = false,

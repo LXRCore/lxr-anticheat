@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Speed Hack Detection (Server)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.Speed.active then
 	local Users = {}
 

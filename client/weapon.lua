@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Weapon Blacklist & Infinite Ammo (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.Weapons.active then
     -- Anti Blacklist Weapons
     CreateThread(function()

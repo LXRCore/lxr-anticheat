@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — XSS Protection
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.XSS.active then
     AddEventHandler("playerConnecting", function (name, kickreason, deferrals)
         deferrals.defer()

@@ -1,3 +1,7 @@
+--[[
+    🐺 LXR Anti-Cheat — Resource Injection Detection (Server)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
 
 local list
 

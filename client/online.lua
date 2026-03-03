@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Online Players (Client, disabled)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 -- VORPcore = {}
 -- local onlineplayers = {}
 

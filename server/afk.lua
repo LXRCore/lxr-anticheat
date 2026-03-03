@@ -1,16 +1,29 @@
+--[[
+    🐺 LXR Anti-Cheat — AFK Detection (Server)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
 
 if Config.AFK.active then
     local GetSteamID = function(src)
         local sid = GetPlayerIdentifiers(src)[1] or false
-    
-        if (sid == false or sid:sub(1,5) ~= "steam") then
+
+        if (sid == false or sid:sub(1, 5) ~= "steam") then
             return false
         end
-    
+
         return sid
     end
 
+    -- ═══════════════════════════════════════════════════════════════════════
+    -- AFK Whitelist (VORP Core only — requires ghmattimysql)
+    -- ═══════════════════════════════════════════════════════════════════════
+
+    local function isVorp()
+        return ACFrameworkName == 'vorp'
+    end
+
     local createTable = function()
+        if not isVorp() then return end
         local result = exports.ghmattimysql:executeSync([[
             CREATE TABLE IF NOT EXISTS `bccacwl` (
                 `id` INT(20) NOT NULL AUTO_INCREMENT,
@@ -20,18 +33,18 @@ if Config.AFK.active then
                 PRIMARY KEY (`id`),
                 INDEX `identifier` (`identifier`)
             ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
         ]])
         if result and result.warningStatus > 1 then
-            print("ERROR: Failed to create AFK WL Table")
+            print("[LXR-AC] ERROR: Failed to create AFK WL Table")
         end
     end
 
     Citizen.CreateThread(function()
-		createTable()
+        createTable()
     end)
 
     RegisterCommand("ac-addAFKWL", function(source, args, rawCommand)
+        if not isVorp() then return end
         local _source = source
         local _target = args[1]
 
@@ -44,11 +57,9 @@ if Config.AFK.active then
         local group = Character.group
 
         if group == 'admin' then
-
             local steamid = GetSteamID(_target)
             local User = VorpCore.getUser(_target)
             local charId = User.getUsedCharacter.charIdentifier
-
 
             exports.ghmattimysql:execute("INSERT INTO bccacwl (identifier, charidentifier, afk) VALUES (@identifier, @charidentifier, @afk)", {["@identifier"] = steamid, ["@charidentifier"] = charId, ["@afk"] = true}, function(result)
                 if result ~= nil then
@@ -62,6 +73,7 @@ if Config.AFK.active then
     end)
 
     RegisterCommand("ac-removeAFKWL", function(source, args, rawCommand)
+        if not isVorp() then return end
         local _source = source
         local _target = args[1]
 
@@ -78,7 +90,7 @@ if Config.AFK.active then
             local User = VorpCore.getUser(_target)
             local charId = User.getUsedCharacter.charIdentifier
 
-            exports.ghmattimysql:execute("UPDATE bccacwl SET afk = false  WHERE identifier = @identifier AND charidentifier = @charidentifier ", {["@identifier"] = steamid, ["@charidentifier"] = charId}, function(result)
+            exports.ghmattimysql:execute("UPDATE bccacwl SET afk = false WHERE identifier = @identifier AND charidentifier = @charidentifier", {["@identifier"] = steamid, ["@charidentifier"] = charId}, function(result)
                 if result ~= nil then
                     TriggerClientEvent("vorp:TipBottom", _source, Config.AFK.lang.whitelist.wlremoved, 5000)
                     TriggerClientEvent("bccac-updateafk", _source, true)
@@ -92,6 +104,13 @@ if Config.AFK.active then
     RegisterServerEvent('bccac-rolecheck')
     AddEventHandler('bccac-rolecheck', function()
         local _source = source
+
+        if not isVorp() then
+            -- Non-VORP: no whitelist DB, allow AFK checks to run
+            TriggerClientEvent("bccac-rolecheck-r", _source, false)
+            return
+        end
+
         local steamid = GetSteamID(_source)
         local User = VorpCore.getUser(_source)
         local charId = User.getUsedCharacter.charIdentifier

@@ -1,3 +1,8 @@
+--[[
+    🐺 LXR Anti-Cheat — Player Status / Health Hack (Client)
+    © 2026 iBoss21 / The Lux Empire | wolves.land | All Rights Reserved
+]]
+
 if Config.PlayerStatus.active then
     -- Anti Health
     CreateThread(function()
